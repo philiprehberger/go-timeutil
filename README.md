@@ -4,7 +4,7 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/philiprehberger/go-timeutil.svg)](https://pkg.go.dev/github.com/philiprehberger/go-timeutil)
 [![License](https://img.shields.io/github/license/philiprehberger/go-timeutil)](LICENSE)
 
-A zero-dependency Go library for time manipulation helpers. Provides boundary calculations, date comparisons, and human-readable time formatting.
+Time manipulation helpers for Go — boundaries, comparisons, and human-readable formatting
 
 ## Installation
 
