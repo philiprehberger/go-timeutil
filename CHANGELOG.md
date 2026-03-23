@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0
+
+- Add quarter boundary helpers: `StartOfQuarter`, `EndOfQuarter`
+- Add year boundary helpers: `StartOfYear`, `EndOfYear`
+- Add business day arithmetic: `PreviousBusinessDay`, `AddBusinessDays`, `BusinessDaysBetween`
+
 ## 0.1.2
 
 - Consolidate README badges onto single line

@@ -92,3 +92,86 @@ func NextBusinessDay(t time.Time) time.Time {
 	}
 	return StartOfDay(next)
 }
+
+// StartOfQuarter returns the first day of the quarter at 00:00:00.000000000,
+// preserving the original time.Location. Quarters: Q1=Jan-Mar, Q2=Apr-Jun,
+// Q3=Jul-Sep, Q4=Oct-Dec.
+func StartOfQuarter(t time.Time) time.Time {
+	y, m, _ := t.Date()
+	quarterMonth := m - (m-1)%3
+	return time.Date(y, quarterMonth, 1, 0, 0, 0, 0, t.Location())
+}
+
+// EndOfQuarter returns the last day of the quarter at 23:59:59.999999999,
+// preserving the original time.Location.
+func EndOfQuarter(t time.Time) time.Time {
+	y, m, _ := t.Date()
+	quarterMonth := m - (m-1)%3
+	lastMonthOfQuarter := quarterMonth + 2
+	firstOfNext := time.Date(y, lastMonthOfQuarter+1, 1, 0, 0, 0, 0, t.Location())
+	lastDay := firstOfNext.AddDate(0, 0, -1)
+	return EndOfDay(lastDay)
+}
+
+// StartOfYear returns January 1 of t's year at 00:00:00.000000000,
+// preserving the original time.Location.
+func StartOfYear(t time.Time) time.Time {
+	return time.Date(t.Year(), 1, 1, 0, 0, 0, 0, t.Location())
+}
+
+// EndOfYear returns December 31 of t's year at 23:59:59.999999999,
+// preserving the original time.Location.
+func EndOfYear(t time.Time) time.Time {
+	return time.Date(t.Year(), 12, 31, 23, 59, 59, 999999999, t.Location())
+}
+
+// PreviousBusinessDay returns the start of the most recent weekday before t.
+// If t is Monday, it returns the previous Friday. The original time.Location
+// is preserved.
+func PreviousBusinessDay(t time.Time) time.Time {
+	prev := t.AddDate(0, 0, -1)
+	for IsWeekend(prev) {
+		prev = prev.AddDate(0, 0, -1)
+	}
+	return StartOfDay(prev)
+}
+
+// AddBusinessDays adds n business days (weekdays) to t. If n is negative,
+// business days are subtracted. Weekends are skipped. The original
+// time.Location is preserved.
+func AddBusinessDays(t time.Time, n int) time.Time {
+	direction := 1
+	remaining := n
+	if n < 0 {
+		direction = -1
+		remaining = -n
+	}
+	result := t
+	for remaining > 0 {
+		result = result.AddDate(0, 0, direction)
+		if !IsWeekend(result) {
+			remaining--
+		}
+	}
+	return StartOfDay(result)
+}
+
+// BusinessDaysBetween returns the number of weekdays between a and b.
+// The count is exclusive of the start date and inclusive of the end date.
+// The result is always non-negative regardless of argument order.
+func BusinessDaysBetween(a, b time.Time) int {
+	a = StartOfDay(a)
+	b = StartOfDay(b)
+	if a.After(b) {
+		a, b = b, a
+	}
+	count := 0
+	cursor := a.AddDate(0, 0, 1)
+	for !cursor.After(b) {
+		if !IsWeekend(cursor) {
+			count++
+		}
+		cursor = cursor.AddDate(0, 0, 1)
+	}
+	return count
+}
