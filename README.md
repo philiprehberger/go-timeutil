@@ -1,6 +1,6 @@
 # go-timeutil
 
-[![CI](https://github.com/philiprehberger/go-timeutil/actions/workflows/ci.yml/badge.svg)](https://github.com/philiprehberger/go-timeutil/actions/workflows/ci.yml) [![Go Reference](https://pkg.go.dev/badge/github.com/philiprehberger/go-timeutil.svg)](https://pkg.go.dev/github.com/philiprehberger/go-timeutil) [![License](https://img.shields.io/github/license/philiprehberger/go-timeutil)](LICENSE)
+[![CI](https://github.com/philiprehberger/go-timeutil/actions/workflows/ci.yml/badge.svg)](https://github.com/philiprehberger/go-timeutil/actions/workflows/ci.yml) [![Go Reference](https://pkg.go.dev/badge/github.com/philiprehberger/go-timeutil.svg)](https://pkg.go.dev/github.com/philiprehberger/go-timeutil) [![License](https://img.shields.io/github/license/philiprehberger/go-timeutil)](LICENSE) [![Sponsor](https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ec6cb9)](https://github.com/sponsors/philiprehberger)
 
 Time manipulation helpers for Go — boundaries, comparisons, and human-readable formatting
 
